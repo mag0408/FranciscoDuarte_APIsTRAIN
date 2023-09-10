@@ -1,0 +1,20 @@
+#use an official Python runtime as the base image
+FROM python:3.9
+
+#set the working directory in the container
+WORKDIR /app
+
+#copy the requirements file into the container
+COPY requirements.txt .
+
+#install the python dependencies 
+RUN pip install --no-cache-dir -r requirements.txt
+
+#copy the normalizer and model files into the container
+COPY train.py . 
+
+
+#run the python script when the container launches
+ENTRYPOINT [ "python", "train.py" ]
+
+
